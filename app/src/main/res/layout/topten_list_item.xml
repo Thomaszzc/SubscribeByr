@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/RelativeLayout01"
+    android:layout_width="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:padding="12dip"
+    >
+
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topten_num"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:paddingLeft="12dip"
+        android:layout_marginRight="12dip"
+        android:textColor="#000"
+        android:layout_width="fill_parent"
+        android:id="@+id/topten_title"
+        android:layout_toRightOf="@+id/topten_num"
+        />
+    <ImageView
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topten_attachment"
+        />
+</RelativeLayout>
