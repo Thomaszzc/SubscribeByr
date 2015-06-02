@@ -166,17 +166,13 @@ public class NavigationDrawerFragment extends Fragment {
 
         map=new HashMap<>();
         map.put("drawer_list_image",R.drawable.word_subscribe);
-        map.put("drawer_list_text","关键词订阅");
+        map.put("drawer_list_text","关键词搜索");
         map.put("drawer_list_flag",R.drawable.flag);
         listItem.add(map);
-        map=new HashMap<>();
-        map.put("drawer_list_image",R.drawable.page_subscribe);
-        map.put("drawer_list_text","版面订阅");
-        map.put("drawer_list_flag", R.drawable.flag);
-        listItem.add(map);
+
         map=new HashMap<>();
         map.put("drawer_list_image",R.drawable.user_subscribe);
-        map.put("drawer_list_text","用户订阅");
+        map.put("drawer_list_text","用户收藏");
         map.put("drawer_list_flag",R.drawable.flag);
         listItem.add(map);
         map=new HashMap<>();

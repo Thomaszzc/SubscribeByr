@@ -82,25 +82,12 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 1:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, WordSubscribeFragment.newInstance(position + 1))
-                        .commit();
-                mTitle = getString(R.string.drawer_list_word_subscribe);
-
-                break;
-            case 2:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, PageSubscribeFragment.newInstance(position + 1))
+                        .replace(R.id.container, RootSectionFragment.newInstance(position + 1))
                         .commit();
                 mTitle = getString(R.string.drawer_list_page_subscribe);
 
                 break;
-            case 3:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, UserSubscribeFragment.newInstance(position + 1))
-                        .commit();
-                mTitle = getString(R.string.drawer_list_user_subscribe);
 
-                break;
             default:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, TopTenFragment.newInstance(position + 1))

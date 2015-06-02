@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import cn.byr.bbs.sdk.api.ArticleApi;
+import cn.byr.bbs.sdk.api.SearchApi;
+import cn.byr.bbs.sdk.api.SectionApi;
 import cn.byr.bbs.sdk.api.UserApi;
 import cn.byr.bbs.sdk.api.WidgetApi;
 import cn.byr.bbs.sdk.auth.Oauth2AccessToken;
@@ -31,6 +33,9 @@ import cn.byr.bbs.sdk.exception.BBSException;
 import cn.byr.bbs.sdk.net.RequestListener;
 import cn.byr.bbs.sdkdemo.Oauth.AccessTokenKeeper;
 import cn.byr.bbs.sdkdemo.bean.Article;
+import cn.byr.bbs.sdkdemo.bean.RootSection;
+import cn.byr.bbs.sdkdemo.bean.Section;
+import cn.byr.bbs.sdkdemo.bean.SubSection;
 import cn.byr.bbs.sdkdemo.bean.Threads;
 import cn.byr.bbs.sdkdemo.bean.TopTen;
 import cn.byr.bbs.sdkdemo.bean.User;
@@ -205,6 +210,39 @@ public class ContentProvider {
         System.out.print("board_info:"+board);
     }
 
+    public void getRootSection(){
+        final SectionApi sectionApi=new SectionApi(mAccessToken);
+        sectionApi.getRootSection(new RequestListener() {
+            @Override
+            public void onComplete(String s) {
+                Gson json=new Gson();
+                RootSection rootSection=json.fromJson(s,RootSection.class);
+                RootSectionFragment.setRootSectionView(rootSection.getSection());
+            }
 
+            @Override
+            public void onException(BBSException e) {
+
+            }
+        });
+
+    }
+
+    public void getSubSection(String name){
+        SectionApi sectionApi=new SectionApi(mAccessToken);
+        sectionApi.getSection(name,new RequestListener() {
+            @Override
+            public void onComplete(String s) {
+                Gson json=new Gson();
+                SubSection subSection=json.fromJson(s,SubSection.class);
+                SubSectionFragment.setSubSection(subSection.getBoard());
+            }
+
+            @Override
+            public void onException(BBSException e) {
+
+            }
+        });
+    }
 
 }
