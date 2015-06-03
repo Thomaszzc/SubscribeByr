@@ -3,9 +3,11 @@ package cn.byr.bbs.sdkdemo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import cn.byr.bbs.sdkdemo.adapter.SubSectionAdapter;
@@ -21,6 +23,8 @@ public class SubSectionFragment extends Fragment {
     private static String sectionName;
     private ContentProvider cp;
 
+    private static Board[] static_boards;
+
     private static ListView lv_sub_section;
     public static SubSectionFragment getInstance(String section_name){
             subSectionFragment=new SubSectionFragment();
@@ -34,6 +38,18 @@ public class SubSectionFragment extends Fragment {
         View view=inflater.inflate(R.layout.rootsection,null);
 
         lv_sub_section=(ListView)view.findViewById(R.id.root_section_list);
+        lv_sub_section.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container,SearchFragment.newInstance(static_boards[position].getName()));
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            }
+        });
+
+
         cp=new ContentProvider(getActivity());
         System.out.println("sectionName---------------->:"+sectionName);
 
@@ -44,9 +60,7 @@ public class SubSectionFragment extends Fragment {
         return view;
     }
     public static void setSubSection(Board[] boards){
-        for(Board board:boards)
-        System.out.println(board.getDescription());
-
+        static_boards=boards;
         SubSectionFragment subSectionFragment1=subSectionFragment;
         SubSectionAdapter adapter=new SubSectionAdapter(subSectionFragment1.getActivity(),boards);
         lv_sub_section.setAdapter(adapter);

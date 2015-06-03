@@ -34,6 +34,7 @@ import cn.byr.bbs.sdk.net.RequestListener;
 import cn.byr.bbs.sdkdemo.Oauth.AccessTokenKeeper;
 import cn.byr.bbs.sdkdemo.bean.Article;
 import cn.byr.bbs.sdkdemo.bean.RootSection;
+import cn.byr.bbs.sdkdemo.bean.SearchRes;
 import cn.byr.bbs.sdkdemo.bean.Section;
 import cn.byr.bbs.sdkdemo.bean.SubSection;
 import cn.byr.bbs.sdkdemo.bean.Threads;
@@ -236,6 +237,27 @@ public class ContentProvider {
                 Gson json=new Gson();
                 SubSection subSection=json.fromJson(s,SubSection.class);
                 SubSectionFragment.setSubSection(subSection.getBoard());
+            }
+
+            @Override
+            public void onException(BBSException e) {
+
+            }
+        });
+    }
+
+    public void searchArticle(String board,String query){
+        SearchApi searchApi=new SearchApi(mAccessToken);
+        searchApi.threadByTitle(board,query,null,null,new RequestListener() {
+            @Override
+            public void onComplete(String s) {
+                System.out.print("query_res:"+s);
+                Gson json=new Gson();
+                SearchRes searchRes=json.fromJson(s,SearchRes.class);
+                Threads[] threads=searchRes.getThreads();
+                SearchFragment.setSearchRes(threads);
+
+
             }
 
             @Override
