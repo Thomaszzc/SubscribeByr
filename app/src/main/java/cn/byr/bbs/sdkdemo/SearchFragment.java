@@ -36,6 +36,8 @@ public class SearchFragment extends Fragment{
 
         cp=new ContentProvider(getActivity());
 
+        lv_search_res=(ListView)view.findViewById(R.id.search_res_list);
+
         searchView=(SearchView)view.findViewById(R.id.seach_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -51,7 +53,6 @@ public class SearchFragment extends Fragment{
                 return false;
             }
         });
-        lv_search_res=(ListView)view.findViewById(R.id.search_res_list);
 
         return view;
     }
@@ -59,6 +60,7 @@ public class SearchFragment extends Fragment{
 
         SearchFragment searchFragment1=searchFragment;
         SearchAdapter adapter=new SearchAdapter(searchFragment1.getActivity(),threads);
+        
         lv_search_res.setAdapter(adapter);
     }
 
